@@ -27,6 +27,8 @@ public class PdfServiceImpl implements PdfService {
 
 		PdfWriter.getInstance(document, out);
 		
+		document.open();
+		
 		// Add seller and buyer sections
         PdfPTable sectionsTable = new PdfPTable(2);
         

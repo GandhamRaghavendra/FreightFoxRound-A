@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.pdf.model.InvoiceDTO;
 import com.pdf.service.PdfService;
+
 
 @RestController
 @RequestMapping("/pdf")
@@ -22,15 +22,15 @@ public class GeneratePdfController {
 	@Autowired
 	private PdfService pdfService;
 	
-	@PostMapping("/generate")
+	
+	@PostMapping(value = "/generate",produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> generatePdfDynamically(@RequestBody InvoiceDTO dto){
 		
 		ByteArrayInputStream document = pdfService.dynamicPdfGenerator(dto);
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 
-		httpHeaders.add("Content-Disposition", "inline;filename=myInvoice.pdf");
-
+		httpHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=myInvoice.pdf");
 		return ResponseEntity
 				.ok()
 				.headers(httpHeaders)
