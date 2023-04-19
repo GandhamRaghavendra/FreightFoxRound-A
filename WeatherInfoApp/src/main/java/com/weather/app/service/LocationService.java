@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.weather.app.exception.LocationException;
 import com.weather.app.model.Location;
 
 public interface LocationService {
@@ -13,7 +14,7 @@ public interface LocationService {
 	 * @param pincod
 	 * @return This method returns Optional<Location> Object.
 	 */
-	Optional<Location> getLocationEntity(Integer pincode);
+	Optional<Location> getLocationEntity(String pincode);
 	
 	
 	
@@ -27,6 +28,7 @@ public interface LocationService {
 	 * For creating locations object we are using Open Weather API service.
 	 * @throws JsonProcessingException 
 	 * @throws JsonMappingException 
+	 * @throws LocationException 
 	 */
-	Location saveLocationEntity(Integer pincode) throws JsonMappingException, JsonProcessingException;
+	Location saveLocationEntity(String pincode) throws JsonMappingException, JsonProcessingException, LocationException;
 }

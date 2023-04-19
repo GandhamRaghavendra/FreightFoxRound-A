@@ -61,6 +61,6 @@ public class WeatherInfo {
     
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "pincode")
+    @JoinColumn(name = "location_id")
     private Location location;
 }

@@ -1,6 +1,7 @@
 package com.weather.app.service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class WeatherInfoServiceImpl implements WeatherInfoService {
 	@Override
 	public WeatherInfo saveWeatherInfo(RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException {
 
-		Optional<Location> loc = locationRepo.findById(dto.getPincode());
+		Optional<Location> loc = locationRepo.findByPincode(dto.getPincode());
 
 		// World Weather API:-
 		
@@ -110,6 +111,24 @@ public class WeatherInfoServiceImpl implements WeatherInfoService {
 		String errorMessage = readTree.path("data").path("error").get(0).path("msg").asText();
 		
 		throw new WeatherInfoException(errorMessage);
+	}
+
+	@Override
+	public Optional<WeatherInfo> getWeatherInfoIfPresent(RequestDto dto) {
+		
+		List<WeatherInfo> weatherInfoList = weatherInfoRepo.findByDate(dto.getDate());
+		
+		if(weatherInfoList.isEmpty()) {
+			return Optional.empty();
+		}
+		
+		for(WeatherInfo info : weatherInfoList) {
+			if(info.getLocation().getPincode().equals(dto.getPincode())) {
+				return Optional.of(info);
+			}
+		}
+		
+		return Optional.empty();
 	}
 
 }

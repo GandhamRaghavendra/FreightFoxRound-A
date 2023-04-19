@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 			err.setTimestamp(LocalDateTime.now());
 			err.setMessage(se.getMessage());
 			err.setDetails(req.getDescription(false));		
-		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -29,9 +29,9 @@ public class GlobalExceptionHandler {
 		
 		MyErrorDetails err= new MyErrorDetails();
 			err.setTimestamp(LocalDateTime.now());
-			err.setMessage(se.getMessage());
+			err.setMessage(se.getBindingResult().getFieldError().getDefaultMessage());
 			err.setDetails(req.getDescription(false));		
-		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
 	}
 	
 
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
 			err.setTimestamp(LocalDateTime.now());
 			err.setMessage(se.getMessage());
 			err.setDetails(req.getDescription(false));		
-		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(WeatherInfoException.class)
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
 			err.setTimestamp(LocalDateTime.now());
 			err.setMessage(se.getMessage());
 			err.setDetails(req.getDescription(false));		
-		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
 	}
 	
 
@@ -63,6 +63,6 @@ public class GlobalExceptionHandler {
 			err.setTimestamp(LocalDateTime.now());
 			err.setMessage(se.getMessage());
 			err.setDetails(req.getDescription(false));		
-		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
 	}
 }
