@@ -54,4 +54,15 @@ public class GlobalExceptionHandler {
 			err.setDetails(req.getDescription(false));		
 		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+
+	@ExceptionHandler(LocationException.class)
+	public ResponseEntity<MyErrorDetails> locationExceptionHandler(LocationException se, WebRequest req){
+		
+		MyErrorDetails err= new MyErrorDetails();
+			err.setTimestamp(LocalDateTime.now());
+			err.setMessage(se.getMessage());
+			err.setDetails(req.getDescription(false));		
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }
