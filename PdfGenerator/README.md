@@ -25,7 +25,7 @@ Engine.
 ## Getting Started
 
 - Download and Run it on local system
-- Two way of accessing service by swagger-ui and postman.
+- Two way of accessing service by `swagger-ui` and `postman`.
 - Using swagger-ui (http://localhost:8080/swagger-ui/index.html#/)
 <h3>Swagger</h3>
 <img src="/images/Screenshot1.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
@@ -34,8 +34,7 @@ Engine.
 <img src="/images/Screenshot2.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
 <h3>Step-2(Provide data)</h3>
-<p>Data Format</p>
-
+`Data Format`
 ```
 {
 "seller": "XYZ Pvt. Ltd.",
