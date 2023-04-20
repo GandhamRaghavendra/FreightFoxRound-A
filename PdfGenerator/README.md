@@ -34,7 +34,9 @@ Engine.
 <img src="/images/Screenshot2.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
 <h3>Step-2(Provide data)</h3>
-`Data Format`
+
+### `Sample Data`
+
 ```
 {
 "seller": "XYZ Pvt. Ltd.",
