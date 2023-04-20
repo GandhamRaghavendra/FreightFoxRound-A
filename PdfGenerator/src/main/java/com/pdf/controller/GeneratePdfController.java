@@ -2,6 +2,8 @@ package com.pdf.controller;
 
 import java.io.ByteArrayInputStream;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -23,8 +25,8 @@ public class GeneratePdfController {
 	private PdfService pdfService;
 	
 	
-	@PostMapping(value = "/generate",produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> generatePdfDynamically(@RequestBody InvoiceDTO dto){
+	@PostMapping(value = "/generate")
+	public ResponseEntity<InputStreamResource> generatePdfDynamically(@RequestBody @Valid InvoiceDTO dto){
 		
 		ByteArrayInputStream document = pdfService.dynamicPdfGenerator(dto);
 		
