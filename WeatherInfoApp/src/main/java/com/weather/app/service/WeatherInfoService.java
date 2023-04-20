@@ -20,7 +20,7 @@ public interface WeatherInfoService {
 	 * @throws JsonProcessingException
 	 * @throws WeatherInfoException
 	 */
-	WeatherInfo saveWeatherInfo(RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException;
+	WeatherInfo getWeatherInfo(RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException;
 	
 	
 	

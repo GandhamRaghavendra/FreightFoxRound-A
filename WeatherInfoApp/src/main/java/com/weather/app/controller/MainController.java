@@ -17,6 +17,7 @@ import com.weather.app.exception.LocationException;
 import com.weather.app.exception.WeatherInfoException;
 import com.weather.app.model.Location;
 import com.weather.app.model.RequestDto;
+import com.weather.app.model.ResponseDto;
 import com.weather.app.model.WeatherInfo;
 import com.weather.app.service.LocationService;
 import com.weather.app.service.WeatherInfoService;
@@ -33,24 +34,51 @@ public class MainController {
 	
 	
 	@PostMapping("/weatherInfo")
-	public String getWeatherInfo(@Valid @RequestBody RequestDto dto){
+	public ResponseEntity<ResponseDto> getWeatherInfo(@Valid @RequestBody RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException, LocationException{
 		
 		// First We will check the given PIN is present in DB or not
 		
 		Optional<Location> loc = locationService.getLocationEntity(dto.getPincode());
 		
+		ResponseDto responseDto = new ResponseDto();
 		
 		if(loc.isPresent()) {
 			
+			Location location = loc.get();
+			
+			responseDto.setLocation(location);
+			
 			Optional<WeatherInfo> weatherInfo = weatherInfoService.getWeatherInfoIfPresent(dto);
 			
-			if(weatherInfo.isEmpty()) return "PIN is present but info not there..";
+			if(weatherInfo.isEmpty()) {
+				
+				WeatherInfo weatherInfo2 = weatherInfoService.getWeatherInfo(dto);
+				
+				responseDto.setWeatherInfo(weatherInfo2);
+				
+			}else {
+				
+				WeatherInfo info = weatherInfo.get();
+				
+				responseDto.setWeatherInfo(info);
+			}	
 			
-			else return "Both are present..";
+		}else {
 			
+			Location saveLocationEntity = locationService.saveLocationEntity(dto.getPincode());
+			
+			WeatherInfo weatherInfo3 = weatherInfoService.getWeatherInfo(dto);
+			
+		    responseDto.setLocation(saveLocationEntity);
+		    
+		    responseDto.setWeatherInfo(weatherInfo3);			
 		}
-		else return "PIN Not Present";
+		
+		return new ResponseEntity<>(responseDto,HttpStatus.OK);
 	}
+	
+	
+	
 	
 	@PostMapping("/testSaveLocation")
 	public ResponseEntity<Location> saveLocationControllerTest(@Valid @RequestBody RequestDto dto) throws JsonMappingException, JsonProcessingException, LocationException{
@@ -62,7 +90,7 @@ public class MainController {
 	
 	@PostMapping("/testSaveWeatherInfo")
 	public ResponseEntity<WeatherInfo> saveWeatherInfoTest(@Valid @RequestBody RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException{
-		WeatherInfo res = weatherInfoService.saveWeatherInfo(dto);
+		WeatherInfo res = weatherInfoService.getWeatherInfo(dto);
 		
 		return new ResponseEntity<WeatherInfo>(res,HttpStatus.OK);
 	}
