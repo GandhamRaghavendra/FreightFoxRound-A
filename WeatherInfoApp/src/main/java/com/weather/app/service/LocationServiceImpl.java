@@ -21,14 +21,14 @@ public class LocationServiceImpl implements LocationService {
 	private RestTemplate restTemplate;
 	
 	@Override
-	public Optional<Location> getLocationEntity(String pincode) {
+	public Optional<Location> getLocationEntityFromDB(String pincode) {
 		
 		return locationRepo.findByPincode(pincode);
 		
 	}
 
 	@Override
-	public Location saveLocationEntity(String pincode) throws JsonMappingException, JsonProcessingException, LocationException {
+	public Location getLocationEntity(String pincode) throws JsonMappingException, JsonProcessingException, LocationException {
 		
 		// Open Weather Geocoding API (http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}).
 		

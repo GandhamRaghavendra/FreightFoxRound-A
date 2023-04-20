@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +23,6 @@ public class RequestDto {
 	private String pincode;
 
 	@NotNull(message = "Date must not be null")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 }

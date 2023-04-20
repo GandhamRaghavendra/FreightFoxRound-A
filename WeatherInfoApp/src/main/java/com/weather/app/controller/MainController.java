@@ -27,71 +27,93 @@ public class MainController {
 
 	@Autowired
 	private LocationService locationService;
-	
+
 	@Autowired
 	private WeatherInfoService weatherInfoService;
-	
-	
-	
+
 	@PostMapping("/weatherInfo")
-	public ResponseEntity<ResponseDto> getWeatherInfo(@Valid @RequestBody RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException, LocationException{
-		
+	public ResponseEntity<ResponseDto> getWeatherInfo(@Valid @RequestBody RequestDto dto)
+			throws JsonMappingException, JsonProcessingException, WeatherInfoException, LocationException {
+
 		// First We will check the given PIN is present in DB or not
-		
-		Optional<Location> loc = locationService.getLocationEntity(dto.getPincode());
-		
+
+		Optional<Location> loc = locationService.getLocationEntityFromDB(dto.getPincode());
+
 		ResponseDto responseDto = new ResponseDto();
-		
-		if(loc.isPresent()) {
-			
+
+		if (loc.isPresent()) {
+
 			Location location = loc.get();
-			
+
 			responseDto.setLocation(location);
-			
+
 			Optional<WeatherInfo> weatherInfo = weatherInfoService.getWeatherInfoIfPresent(dto);
-			
-			if(weatherInfo.isEmpty()) {
-				
+
+			if (weatherInfo.isEmpty()) {
+
 				WeatherInfo weatherInfo2 = weatherInfoService.getWeatherInfo(dto);
-				
+
 				responseDto.setWeatherInfo(weatherInfo2);
-				
-			}else {
-				
+
+			} else {
+
 				WeatherInfo info = weatherInfo.get();
-				
+
 				responseDto.setWeatherInfo(info);
-			}	
-			
-		}else {
-			
-			Location saveLocationEntity = locationService.saveLocationEntity(dto.getPincode());
-			
+			}
+
+		} else {
+
+			Location saveLocationEntity = locationService.getLocationEntity(dto.getPincode());
+
 			WeatherInfo weatherInfo3 = weatherInfoService.getWeatherInfo(dto);
-			
-		    responseDto.setLocation(saveLocationEntity);
-		    
-		    responseDto.setWeatherInfo(weatherInfo3);			
+
+			responseDto.setLocation(saveLocationEntity);
+
+			responseDto.setWeatherInfo(weatherInfo3);
 		}
-		
-		return new ResponseEntity<>(responseDto,HttpStatus.OK);
+
+		return new ResponseEntity<>(responseDto, HttpStatus.OK);
 	}
 	
 	
 	
 	
+	
+	
+
+	/**
+	 * This controller is for testing 
+	 * @param dto
+	 * @return
+	 * @throws JsonMappingException
+	 * @throws JsonProcessingException
+	 * @throws LocationException
+	 */
 	@PostMapping("/testSaveLocation")
-	public ResponseEntity<Location> saveLocationControllerTest(@Valid @RequestBody RequestDto dto) throws JsonMappingException, JsonProcessingException, LocationException{
-		
-		Location loc = locationService.saveLocationEntity(dto.getPincode());
-		
-		return new ResponseEntity<Location>(loc,HttpStatus.OK);
+	public ResponseEntity<Location> saveLocationControllerTest(@Valid @RequestBody RequestDto dto)
+			throws JsonMappingException, JsonProcessingException, LocationException {
+
+		Location loc = locationService.getLocationEntity(dto.getPincode());
+
+		return new ResponseEntity<Location>(loc, HttpStatus.OK);
 	}
+
 	
+	/**
+	 * 
+	 * @param dto
+	 * @return
+	 * @throws JsonMappingException
+	 * @throws JsonProcessingException
+	 * @throws WeatherInfoException
+	 */
 	@PostMapping("/testSaveWeatherInfo")
-	public ResponseEntity<WeatherInfo> saveWeatherInfoTest(@Valid @RequestBody RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException{
+	public ResponseEntity<WeatherInfo> saveWeatherInfoTest(@Valid @RequestBody RequestDto dto)
+			throws JsonMappingException, JsonProcessingException, WeatherInfoException {
 		WeatherInfo res = weatherInfoService.getWeatherInfo(dto);
-		
-		return new ResponseEntity<WeatherInfo>(res,HttpStatus.OK);
+
+		return new ResponseEntity<WeatherInfo>(res, HttpStatus.OK);
 	}
+
 }
