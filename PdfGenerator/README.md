@@ -26,7 +26,9 @@ Engine.
 
 ## Getting Started
 
-- Download and Run it on local system
+- Clone repo to local system
+- Change DB details (`DB_Name`,`Username`,`Password`) present in [application.propert]("/images/dbProperty.png")file.
+- Run the Sprinngboot app
 - Two way of accessing service by `swagger-ui` and `postman`.
 - Using swagger-ui (http://localhost:8080/swagger-ui/index.html#/)
 <h3>Swagger</h3>
