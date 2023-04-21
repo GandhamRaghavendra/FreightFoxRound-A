@@ -37,7 +37,7 @@ Engine.
 
 ### `Sample Data`
 
-```
+```ruby
 {
 "seller": "XYZ Pvt. Ltd.",
 "sellerGstin": "29AABBCCDD121ZD",
