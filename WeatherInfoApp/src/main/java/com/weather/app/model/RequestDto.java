@@ -3,6 +3,7 @@ package com.weather.app.model;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +24,7 @@ public class RequestDto {
 	private String pincode;
 
 	@NotNull(message = "Date must not be null")
+	@PastOrPresent(message = "Date must be in the past or present")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 }

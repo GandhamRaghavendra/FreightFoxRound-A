@@ -114,7 +114,7 @@ public class WeatherInfoServiceImpl implements WeatherInfoService {
 	}
 
 	@Override
-	public Optional<WeatherInfo> getWeatherInfoIfPresent(RequestDto dto) {
+	public Optional<WeatherInfo> getWeatherInfoIfPresent(RequestDto dto){
 
 		List<WeatherInfo> weatherInfoList = weatherInfoRepo.findByDate(dto.getDate());
 

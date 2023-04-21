@@ -21,7 +21,7 @@ public class LocationServiceImpl implements LocationService {
 	private RestTemplate restTemplate;
 	
 	@Override
-	public Optional<Location> getLocationEntityFromDB(String pincode) {
+	public Optional<Location> getLocationEntityFromDB(String pincode) throws JsonMappingException, JsonProcessingException {
 		
 		return locationRepo.findByPincode(pincode);
 		

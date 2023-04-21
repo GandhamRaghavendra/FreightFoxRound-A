@@ -15,8 +15,11 @@ public interface LocationService {
 	 * @param Pincode Of provided location
 	 * 
 	 * @return This method returns Optional<Location> Object.
+	 * @throws LocationException 
+	 * @throws JsonProcessingException 
+	 * @throws JsonMappingException 
 	 */
-	Optional<Location> getLocationEntityFromDB(String pincode);
+	Optional<Location> getLocationEntityFromDB(String pincode) throws JsonMappingException, JsonProcessingException, LocationException;
 	
 	
 	

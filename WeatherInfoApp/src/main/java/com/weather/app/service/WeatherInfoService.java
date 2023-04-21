@@ -28,6 +28,9 @@ public interface WeatherInfoService {
 	 * 
 	 * @param RequestDto
 	 * @return
+	 * @throws WeatherInfoException 
+	 * @throws JsonProcessingException 
+	 * @throws JsonMappingException 
 	 */
-	Optional<WeatherInfo> getWeatherInfoIfPresent(RequestDto dto);
+	Optional<WeatherInfo> getWeatherInfoIfPresent(RequestDto dto) throws JsonMappingException, JsonProcessingException, WeatherInfoException;
 }

@@ -37,6 +37,7 @@ public class GeneratePdfController {
 				.ok()
 				.headers(httpHeaders)
 				.contentType(MediaType.APPLICATION_PDF)
+				
 				.body(new InputStreamResource(document));
 	}
 }
