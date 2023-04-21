@@ -3,23 +3,28 @@ package com.pdf.service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
-
+import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.pdf.model.InvoiceDTO;
+import com.pdf.exception.InvoiceException;
+import com.pdf.model.InvoiceData;
 import com.pdf.model.Item;
+import com.pdf.repository.InvoiceDataRepo;
 
 @Service
 public class PdfServiceImpl implements PdfService {
+	
+	@Autowired
+	private InvoiceDataRepo dataRepo;
 
 	@Override
-	public ByteArrayInputStream dynamicPdfGenerator(InvoiceDTO invoiceDTO) {
+	public ByteArrayInputStream dynamicPdfGenerator(InvoiceData invoiceDTO) {
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -136,6 +141,27 @@ public class PdfServiceImpl implements PdfService {
         
         // Converting "ByteArrayOutputStream" to "ByteArrayInputStream" and returning.
         return new ByteArrayInputStream(out.toByteArray());
+	}
+	
+	
+
+	@Override
+	public InvoiceData saveInvoiceData(InvoiceData data) {
+		@NotNull(message = "Items list must not be null")
+		List<Item> list = data.getItems();
+		
+		for(Item i :list) {
+			i.setInvoiceData(data);
+		}
+		
+		return dataRepo.save(data);
+	}
+
+
+
+	@Override
+	public InvoiceData findInoiDataById(Integer id) throws InvoiceException {
+		return dataRepo.findById(id).orElseThrow(() -> new InvoiceException("Invalid invoiceId..!"));
 	}
 
 }
