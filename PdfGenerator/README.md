@@ -15,6 +15,8 @@ Engine.
 - SpringBoot
 - STS/Eclipse
 - SpringWeb
+- Spring Data JPA
+- MySQL
 - Spring DevTools
 - OpenPDF
 - Lombok
@@ -55,10 +57,9 @@ Engine.
 ]
 }
 ```
-
 <img src="/images/Screenshot3.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
-<h3>Step-3(Download the file)</h3>
+<h3>Step-3()</h3>
 <img src="/images/Screenshot4.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
 
