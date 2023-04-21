@@ -61,8 +61,15 @@ Engine.
 ```
 <img src="/images/Screenshot3.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
-<h3>Step-3()</h3>
+<h3>Step-3(On successfull call you will receive `InvoiceId`)</h3>
 <img src="/images/Screenshot4.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
+<h3>Step-3(Use `InvoiceId` to get Pdf file)</h3>
+<img src="/images/Screenshot5.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
+<h3>Step-3(On successfull call you can download file)</h3>
+<img src="/images/Screenshot6.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
+
+<h3>Final Result</h3>
+<img src="/images/resultPdf.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
