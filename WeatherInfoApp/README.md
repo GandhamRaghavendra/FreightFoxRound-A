@@ -24,7 +24,14 @@ This project provides a REST API for getting weather information for a particula
 ## Getting Started
 
 ### Prerequisites
+   - Java Development Kit (JDK) 8 or higher
+   - Integrated Development Environment (IDE) `Sts/Eclipse`
+   - MySQL database
+   
 ### Installing
+   - Clone this repository to your local machine
+   - Update the DB properties `DB_Name`,`UserName`,`Password` present in [application.property](/images/dbProperty.png) file
+   -
 ### API Endpoints
 - **`http://localhost:8185/weatherInfo`**</br>
 Returns the weather information for a particular day and pincode.
