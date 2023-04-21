@@ -31,6 +31,15 @@ Engine.
 - Run the Sprinngboot app
 - Two way of accessing service by `swagger-ui` and `postman`.
 - Using swagger-ui (http://localhost:8080/swagger-ui/index.html#/)
+### API Endpoint
+   - **`http://localhost:8080/pdf/storeData`**
+      - This API used for storing InvoiceData
+      - In request body it will take InvoiceData Entity with Item's list
+      - On successfull response it will provide `InvoiceId`
+      </br>
+   - **`http://localhost:8080/pdf/generate/{InvoiceId}`**
+      - This API used for getting Pdf file for perticular `InvoiceId`
+      - On successfull we can Download the file
 <h3>Swagger</h3>
 <img src="/images/Screenshot1.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
