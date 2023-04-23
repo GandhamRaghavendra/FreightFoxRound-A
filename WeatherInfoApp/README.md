@@ -14,6 +14,9 @@ This project provides a REST API for getting weather information for a particula
 - Postman
 - Swagger-ui
 
+## ER Diagram
+<img src="/images/weatherEr.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
+
 ## API's Used
 
 - **`OpenWeather Geocoding API`** (https://openweathermap.org/api)
