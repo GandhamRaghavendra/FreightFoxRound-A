@@ -24,7 +24,7 @@ Engine.
 - Swagger-ui
 
 ## ER Diagram
-<img src="/images/PdfGeneratorEr.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
+<img src="/images/pdfGenEr.png" alt="Alt text" style="width: 80%; display: block; margin: 0 auto;">
 
 
 ## Getting Started
